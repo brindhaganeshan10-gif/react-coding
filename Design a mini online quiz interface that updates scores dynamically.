@@ -1,0 +1,83 @@
+import { useState } from "react";
+
+const questions = [
+  {
+    question: "What does React use to build UI?",
+    options: ["Databases", "Components", "Servers", "Browsers"],
+    answer: "Components",
+  },
+  {
+    question: "Which hook is used for state?",
+    options: ["useData", "useState", "useEffect", "useRef"],
+    answer: "useState",
+  },
+  {
+    question: "What language is React written in?",
+    options: ["Python", "Java", "JavaScript", "C++"],
+    answer: "JavaScript",
+  },
+];
+
+export default function Quiz() {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showResult, setShowResult] = useState(false);
+
+  const handleAnswer = (option) => {
+    if (option === questions[currentQuestion].answer) {
+      setScore(score + 1);
+    }
+
+    const next = currentQuestion + 1;
+    if (next < questions.length) {
+      setCurrentQuestion(next);
+    } else {
+      setShowResult(true);
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      <h1>Mini Quiz</h1>
+
+      {showResult ? (
+        <h2>
+          Final Score: {score} / {questions.length}
+        </h2>
+      ) : (
+        <>
+          <h2>{questions[currentQuestion].question}</h2>
+
+          {questions[currentQuestion].options.map((option) => (
+            <button
+              key={option}
+              onClick={() => handleAnswer(option)}
+              style={styles.button}
+            >
+              {option}
+            </button>
+          ))}
+
+          <p>Score: {score}</p>
+        </>
+      )}
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    maxWidth: "400px",
+    margin: "50px auto",
+    textAlign: "center",
+    fontFamily: "Arial, sans-serif",
+  },
+  button: {
+    display: "block",
+    width: "100%",
+    padding: "10px",
+    margin: "8px 0",
+    fontSize: "16px",
+    cursor: "pointer",
+  },
+};
