@@ -1,0 +1,21 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+const Category = ({ name }) => <h3>{name} Products</h3>;
+
+const SimpleProduct = () => {
+  return (
+    <Router>
+      <h2>Product Categories</h2>
+      <Link to="/electronics">Electronics</Link> |{" "}
+      <Link to="/clothing">Clothing</Link>
+
+      <Routes>
+        <Route path="/electronics" element={<Category name="Electronics" />} />
+        <Route path="/clothing" element={<Category name="Clothing" />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default SimpleProduct;
