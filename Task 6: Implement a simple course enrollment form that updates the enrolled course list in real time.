@@ -1,0 +1,89 @@
+Course.jsx
+import React, { useState } from "react";
+
+function Course() {
+  const [studentName, setStudentName] = useState("");
+  const [courseName, setCourseName] = useState("");
+  const [enrolledCourses, setEnrolledCourses] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (studentName.trim() === "" || courseName.trim() === "") {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    const newEnrollment = {
+      id: Date.now(),
+      studentName: studentName,
+      courseName: courseName,
+    };
+
+    setEnrolledCourses([...enrolledCourses, newEnrollment]);
+    setStudentName("");
+    setCourseName("");
+  };
+
+  return (
+    <div style={{ maxWidth: "400px" }}>
+      <h2>Course Enrollment</h2>
+
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: "10px" }}>
+          <input
+            type="text"
+            placeholder="Student Name"
+            value={studentName}
+            onChange={(e) => setStudentName(e.target.value)}
+            style={{ width: "100%" }}
+          />
+        </div>
+
+        <div style={{ marginBottom: "10px" }}>
+          <input
+            type="text"
+            placeholder="Course Name"
+            value={courseName}
+            onChange={(e) => setCourseName(e.target.value)}
+            style={{ width: "100%" }}
+          />
+        </div>
+
+        <button type="submit">Enroll</button>
+      </form>
+
+      <hr />
+
+      <h3>Enrolled Courses</h3>
+
+      {enrolledCourses.length === 0 && (
+        <p>No students enrolled yet.</p>
+      )}
+
+      {enrolledCourses.map((item) => (
+        <div
+          key={item.id}
+          style={{
+            border: "1px solid #ccc",
+            padding: "8px",
+            marginBottom: "8px",
+          }}
+        >
+          <strong>{item.studentName}</strong> enrolled in{" "}
+          <em>{item.courseName}</em>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default Course;
+app.jsx
+import Course from "./Course";
+
+function App() {
+  return <Course />;
+}
+
+export default App
