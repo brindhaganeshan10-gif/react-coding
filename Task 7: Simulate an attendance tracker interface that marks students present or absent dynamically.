@@ -1,0 +1,81 @@
+import React, { useState } from "react";
+
+function Tracker() {
+  const [students, setStudents] = useState([
+    { id: 1, name: "Alice", status: "Absent" },
+    { id: 2, name: "Bob", status: "Absent" },
+    { id: 3, name: "Charlie", status: "Absent" },
+  ]);
+
+  const markPresent = (id) => {
+    const updatedStudents = students.map((student) =>
+      student.id === id
+        ? { ...student, status: "Present" }
+        : student
+    );
+    setStudents(updatedStudents);
+  };
+
+  const markAbsent = (id) => {
+    const updatedStudents = students.map((student) =>
+      student.id === id
+        ? { ...student, status: "Absent" }
+        : student
+    );
+    setStudents(updatedStudents);
+  };
+
+  return (
+    <div style={{ maxWidth: "500px" }}>
+      <h2>Attendance Tracker</h2>
+
+      {students.map((student) => (
+        <div
+          key={student.id}
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "10px",
+            padding: "8px",
+            border: "1px solid #ccc",
+          }}
+        >
+          <span>
+            {student.name} -{" "}
+            <strong
+              style={{
+                color:
+                  student.status === "Present" ? "green" : "red",
+              }}
+            >
+              {student.status}
+            </strong>
+          </span>
+
+          <div>
+            <button
+              onClick={() => markPresent(student.id)}
+              style={{ marginRight: "5px" }}
+            >
+              Present
+            </button>
+            <button onClick={() => markAbsent(student.id)}>
+              Absent
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default Tracker;
+app.jsx
+import Tracker from "./Tracker";
+
+function App() {
+  return <Tracker />;
+}
+
+export default App;
