@@ -1,0 +1,35 @@
+import React, { useState } from "react";
+
+const BasicAuth = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const login = () => {
+    if (username === "admin" && password === "1234") {
+      alert("Login Successful");
+    } else {
+      alert("Invalid username or password");
+    }
+  };
+
+  return (
+    <div>
+      <h2>Basic Authentication</h2>
+
+      <input
+        placeholder="Username"
+        onChange={(e) => setUsername(e.target.value)}
+      /><br /><br />
+
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)}
+      /><br /><br />
+
+      <button onClick={login}>Login</button>
+    </div>
+  );
+};
+
+export default BasicAuth;
