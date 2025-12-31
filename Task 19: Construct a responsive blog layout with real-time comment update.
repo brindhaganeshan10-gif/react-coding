@@ -1,0 +1,35 @@
+import React, { useState } from "react";
+
+const ResponsiveBlog = () => {
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+
+  const addComment = () => {
+    if (comment.trim() === "") return;
+    setComments([...comments, comment]);
+    setComment("");
+  };
+
+  return (
+    <div style={{ maxWidth: "600px", margin: "auto" }}>
+      <h2>Blog Post</h2>
+      <p>This is a responsive blog layout.</p>
+
+      <h3>Comments</h3>
+      <input
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+        placeholder="Add a comment"
+      />
+      <button onClick={addComment}>Post</button>
+
+      <ul>
+        {comments.map((c, i) => (
+          <li key={i}>{c}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ResponsiveBlog;
