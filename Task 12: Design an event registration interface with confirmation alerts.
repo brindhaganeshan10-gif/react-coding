@@ -1,0 +1,59 @@
+registration.jsx
+import React from "react";
+
+function Event() {
+  const registerEvent = () => {
+    // 1. Ask for participant name
+    const name = prompt("Enter your name:");
+    if (!name) {
+      alert("Registration cancelled. Name is required.");
+      return;
+    }
+
+    // 2. Ask for email
+    const email = prompt("Enter your email:");
+    if (!email) {
+      alert("Registration cancelled. Email is required.");
+      return;
+    }
+
+    // 3. Ask for event selection
+    const eventName = prompt(
+      "Enter the event you want to register for (e.g., Coding Workshop, Art Class):"
+    );
+    if (!eventName) {
+      alert("Registration cancelled. Event name is required.");
+      return;
+    }
+
+    // 4. Confirm registration
+    const confirmReg = window.confirm(
+      `Confirm registration for ${name} (${email}) for "${eventName}"?`
+    );
+
+    if (confirmReg) {
+      alert(
+        `Registration successful!\nName: ${name}\nEmail: ${email}\nEvent: ${eventName}`
+      );
+    } else {
+      alert("Registration cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Event Registration</h2>
+      <button onClick={registerEvent}>Register for Event</button>
+    </div>
+  );
+}
+
+export default Event;
+app.jsx
+import Event from "./Event";
+
+function App() {
+  return <Event />;
+}
+
+export default App;
