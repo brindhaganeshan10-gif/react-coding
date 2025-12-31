@@ -1,0 +1,47 @@
+import React, { useState } from "react";
+
+const Registration = () => {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    workshop: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <div>
+      <h2>Workshop Registration</h2>
+
+      <input
+        name="name"
+        placeholder="Name"
+        onChange={handleChange}
+      /><br /><br />
+
+      <input
+        name="email"
+        placeholder="Email"
+        onChange={handleChange}
+      /><br /><br />
+
+      <select name="workshop" onChange={handleChange}>
+        <option value="">Select Workshop</option>
+        <option value="React">React</option>
+        <option value="AI">AI</option>
+        <option value="Web Design">Web Design</option>
+      </select>
+
+      <hr />
+
+      <h3>Live Preview</h3>
+      <p><b>Name:</b> {form.name}</p>
+      <p><b>Email:</b> {form.email}</p>
+      <p><b>Workshop:</b> {form.workshop}</p>
+    </div>
+  );
+};
+
+export default Registration;
