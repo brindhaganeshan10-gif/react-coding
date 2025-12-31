@@ -1,0 +1,28 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+const Home = () => <h3>Home Page</h3>;
+const Profile = () => <h3>Student Profile</h3>;
+const Results = () => <h3>Results Page</h3>;
+
+const MultiPage = () => {
+  return (
+    <Router>
+      <h2>Student Dashboard</h2>
+
+      <nav>
+        <Link to="/">Home</Link> |{" "}
+        <Link to="/profile">Profile</Link> |{" "}
+        <Link to="/results">Results</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/results" element={<Results />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default MultiPage;
