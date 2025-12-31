@@ -1,0 +1,57 @@
+ticket.jsx
+import React from "react";
+
+function Ticket() {
+  const bookTicket = () => {
+    // 1. Ask user for name
+    const name = prompt("Enter your name:");
+    if (!name) {
+      alert("Booking cancelled. Name is required.");
+      return;
+    }
+
+    // 2. Ask user for flight destination
+    const destination = prompt("Enter your flight destination:");
+    if (!destination) {
+      alert("Booking cancelled. Destination is required.");
+      return;
+    }
+
+    // 3. Ask user for number of tickets
+    const tickets = prompt("How many tickets do you want to book?");
+    if (!tickets || isNaN(tickets) || Number(tickets) <= 0) {
+      alert("Booking cancelled. Invalid number of tickets.");
+      return;
+    }
+
+    // 4. Confirm booking
+    const confirmBooking = window.confirm(
+      `Confirm booking for ${name} to ${destination} (${tickets} ticket(s))?`
+    );
+
+    if (confirmBooking) {
+      alert(
+        `Booking successful!\nPassenger: ${name}\nDestination: ${destination}\nTickets: ${tickets}`
+      );
+    } else {
+      alert("Booking cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Flight Ticket Booking</h2>
+      <button onClick={bookTicket}>Book Ticket</button>
+    </div>
+  );
+}
+
+export default Ticket;
+app.jsx
+import Ticket from "./Ticket";
+
+function App() {
+  return <Ticket />;
+}
+
+export default App;
