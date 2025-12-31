@@ -1,0 +1,47 @@
+import React, { useState } from "react";
+
+const StudentFeedback = () => {
+  const [rating, setRating] = useState("");
+  const [comment, setComment] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const submitFeedback = () => {
+    if (!rating || !comment) {
+      alert("Please complete all fields");
+      return;
+    }
+    setSubmitted(true);
+  };
+
+  return (
+    <div>
+      <h2>Student Feedback</h2>
+
+      <select onChange={(e) => setRating(e.target.value)}>
+        <option value="">Rating</option>
+        <option value="1">1 - Poor</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 - Excellent</option>
+      </select><br /><br />
+
+      <textarea
+        placeholder="Comments"
+        onChange={(e) => setComment(e.target.value)}
+      /><br /><br />
+
+      <button onClick={submitFeedback}>Submit</button>
+
+      {submitted && (
+        <div>
+          <h3>Feedback Submitted</h3>
+          <p>Rating: {rating}</p>
+          <p>Comment: {comment}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default StudentFeedback;
