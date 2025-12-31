@@ -1,0 +1,86 @@
+Feedback.jsx
+import React, { useState } from "react";
+
+function Feedback() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [feedbackList, setFeedbackList] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (name.trim() === "" || message.trim() === "") {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    const newFeedback = {
+      id: Date.now(),
+      name: name,
+      message: message,
+    };
+
+    setFeedbackList([...feedbackList, newFeedback]);
+    setName("");
+    setMessage("");
+  };
+
+  return (
+    <div style={{ maxWidth: "400px" }}>
+      <h2>Feedback Form</h2>
+
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: "10px" }}>
+          <input
+            type="text"
+            placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={{ width: "100%" }}
+          />
+        </div>
+
+        <div style={{ marginBottom: "10px" }}>
+          <textarea
+            placeholder="Your Feedback"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            style={{ width: "100%" }}
+          />
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <hr />
+
+      <h3>Submitted Feedback</h3>
+      {feedbackList.length === 0 && <p>No feedback yet.</p>}
+
+      {feedbackList.map((item) => (
+        <div
+          key={item.id}
+          style={{
+            border: "1px solid #ccc",
+            padding: "8px",
+            marginBottom: "8px",
+          }}
+        >
+          <strong>{item.name}</strong>
+          <p>{item.message}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default Feedback;
+
+app.jsx
+import Feedback from "./Feedback";
+
+function App() {
+  return <Feedback />;
+}
+
+export default App;
