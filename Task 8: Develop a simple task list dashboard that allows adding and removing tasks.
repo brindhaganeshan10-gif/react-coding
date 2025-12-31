@@ -1,0 +1,76 @@
+task.jsx
+import React, { useState } from "react";
+
+function Task() {
+  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  const handleAddTask = (e) => {
+    e.preventDefault();
+    if (task.trim() === "") {
+      alert("Please enter a task");
+      return;
+    }
+
+    const newTask = {
+      id: Date.now(),
+      text: task,
+    };
+
+    setTasks([...tasks, newTask]);
+    setTask("");
+  };
+
+  const handleRemoveTask = (id) => {
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+  };
+
+  return (
+    <div style={{ maxWidth: "400px" }}>
+      <h2>Task Dashboard</h2>
+
+      <form onSubmit={handleAddTask} style={{ marginBottom: "20px" }}>
+        <input
+          type="text"
+          placeholder="Enter a task"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          style={{ width: "70%", marginRight: "10px" }}
+        />
+        <button type="submit">Add</button>
+      </form>
+
+      {tasks.length === 0 && <p>No tasks added yet.</p>}
+
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        {tasks.map((t) => (
+          <li
+            key={t.id}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              border: "1px solid #ccc",
+              padding: "8px",
+              marginBottom: "8px",
+            }}
+          >
+            <span>{t.text}</span>
+            <button onClick={() => handleRemoveTask(t.id)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Task;
+app.jsx
+import Task from "./Task";
+
+function App() {
+  return <Task />;
+}
+
+export default App;
