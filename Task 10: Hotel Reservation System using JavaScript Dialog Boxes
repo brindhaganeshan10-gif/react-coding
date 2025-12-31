@@ -1,0 +1,64 @@
+reservation.jsx
+import React from "react";
+
+function Reservation() {
+  const bookHotel = () => {
+    // 1. Ask for guest name
+    const guestName = prompt("Enter your name:");
+    if (!guestName) {
+      alert("Reservation cancelled. Name is required.");
+      return;
+    }
+
+    // 2. Ask for number of rooms
+    const rooms = prompt("How many rooms would you like to book?");
+    if (!rooms || isNaN(rooms) || Number(rooms) <= 0) {
+      alert("Reservation cancelled. Invalid number of rooms.");
+      return;
+    }
+
+    // 3. Ask for check-in date
+    const checkIn = prompt("Enter check-in date (YYYY-MM-DD):");
+    if (!checkIn) {
+      alert("Reservation cancelled. Check-in date is required.");
+      return;
+    }
+
+    // 4. Ask for check-out date
+    const checkOut = prompt("Enter check-out date (YYYY-MM-DD):");
+    if (!checkOut) {
+      alert("Reservation cancelled. Check-out date is required.");
+      return;
+    }
+
+    // 5. Confirm reservation
+    const confirmBooking = window.confirm(
+      `Confirm reservation for ${guestName}?\nRooms: ${rooms}\nCheck-in: ${checkIn}\nCheck-out: ${checkOut}`
+    );
+
+    if (confirmBooking) {
+      alert(
+        `Reservation confirmed!\nGuest: ${guestName}\nRooms: ${rooms}\nCheck-in: ${checkIn}\nCheck-out: ${checkOut}`
+      );
+    } else {
+      alert("Reservation cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Hotel Reservation System</h2>
+      <button onClick={bookHotel}>Book Hotel</button>
+    </div>
+  );
+}
+
+export default Reservation;
+app.jsx
+import Reservation from "./Reservation";
+
+function App() {
+  return <Reservation />;
+}
+
+export default App
