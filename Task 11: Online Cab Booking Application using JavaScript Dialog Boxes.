@@ -1,0 +1,73 @@
+cab.jsx
+import React from "react";
+
+function Cab() {
+  const bookCab = () => {
+    // 1. Ask for passenger name
+    const passenger = prompt("Enter your name:");
+    if (!passenger) {
+      alert("Booking cancelled. Name is required.");
+      return;
+    }
+
+    // 2. Ask for pickup location
+    const pickup = prompt("Enter pickup location:");
+    if (!pickup) {
+      alert("Booking cancelled. Pickup location is required.");
+      return;
+    }
+
+    // 3. Ask for drop location
+    const drop = prompt("Enter drop location:");
+    if (!drop) {
+      alert("Booking cancelled. Drop location is required.");
+      return;
+    }
+
+    // 4. Ask for cab type
+    const cabType = prompt(
+      "Enter cab type (e.g., Mini, Sedan, SUV):"
+    );
+    if (!cabType) {
+      alert("Booking cancelled. Cab type is required.");
+      return;
+    }
+
+    // 5. Ask for number of passengers
+    const passengers = prompt("Enter number of passengers:");
+    if (!passengers || isNaN(passengers) || Number(passengers) <= 0) {
+      alert("Booking cancelled. Invalid number of passengers.");
+      return;
+    }
+
+    // 6. Confirm booking
+    const confirmBooking = window.confirm(
+      `Confirm cab booking for ${passenger}?\nPickup: ${pickup}\nDrop: ${drop}\nCab Type: ${cabType}\nPassengers: ${passengers}`
+    );
+
+    if (confirmBooking) {
+      alert(
+        `Cab booked successfully!\nPassenger: ${passenger}\nPickup: ${pickup}\nDrop: ${drop}\nCab Type: ${cabType}\nPassengers: ${passengers}`
+      );
+    } else {
+      alert("Booking cancelled.");
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Online Cab Booking</h2>
+      <button onClick={bookCab}>Book a Cab</button>
+    </div>
+  );
+}
+
+export default Cab;
+app.jsx
+import Cab from "./Cab";
+
+function App() {
+  return <Cab />;
+}
+
+export default App;
