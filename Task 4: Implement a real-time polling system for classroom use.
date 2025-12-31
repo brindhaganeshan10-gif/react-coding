@@ -1,0 +1,53 @@
+classroom.jsx
+import React, { useState } from "react";
+
+function Classroom() {
+  const [question] = useState("Which option do you prefer?");
+  const [options, setOptions] = useState([
+    { id: 1, text: "Option A", votes: 0 },
+    { id: 2, text: "Option B", votes: 0 },
+    { id: 3, text: "Option C", votes: 0 },
+  ]);
+
+  const vote = (id) => {
+    const updatedOptions = options.map((option) =>
+      option.id === id
+        ? { ...option, votes: option.votes + 1 }
+        : option
+    );
+    setOptions(updatedOptions);
+  };
+
+  return (
+    <div>
+      <h2>{question}</h2>
+      {options.map((option) => (
+        <div key={option.id} style={{ marginBottom: "10px" }}>
+          <button onClick={() => vote(option.id)}>
+            {option.text}
+          </button>
+          <span style={{ marginLeft: "10px" }}>
+            Votes: {option.votes}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default Classroom;
+
+app.jsx
+import React from "react";
+import Classroom from "./Classroom";
+
+function App() {
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>Classroom Polling System</h1>
+      <Classroom />
+    </div>
+  );
+}
+
+export default App;
