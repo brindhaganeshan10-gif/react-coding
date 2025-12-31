@@ -1,0 +1,38 @@
+import React from "react";
+
+const students = [
+  { id: 1, name: "Alex", course: "Math" },
+  { id: 2, name: "Sam", course: "Science" },
+];
+
+const StudentDashboard = () => {
+  return (
+    <div>
+      <h2>Student Management Dashboard</h2>
+
+      <nav>
+        <button>Students</button>
+        <button>Courses</button>
+      </nav>
+
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Course</th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.map((s) => (
+            <tr key={s.id}>
+              <td>{s.name}</td>
+              <td>{s.course}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default StudentDashboard;
